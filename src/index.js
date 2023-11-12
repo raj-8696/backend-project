@@ -10,6 +10,7 @@ connectDB()
   .then(() => {
     app.on("error", (err) => {
       console.log("Error: ", err);
+      throw err;
     });
 
     app.listen(process.env.PORT || 3000, () => {
@@ -18,4 +19,5 @@ connectDB()
   })
   .catch((error) => {
     console.log("MONGODB Connection Failed", error);
+    throw error;
   });
