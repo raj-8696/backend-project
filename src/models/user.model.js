@@ -6,26 +6,30 @@ const userSchema = new Schema(
   {
     username: {
       type: String,
-      required: [true, "Username is required"],
+      required: true,
       unique: true,
       lowercase: true,
       index: true,
     },
     email: {
       type: String,
-      required: [true, "Email is required"],
+      required: true,
       unique: true,
       lowercase: true,
     },
-    fullname: {
+    fullName: {
       type: String,
-      required: [true, "Fullname is required"],
+      required: true,
     },
     avatar: {
       type: String,
-      required: [true, "Avatar is required"],
+      required: true,
     },
-    coverImage: [
+    coverImage: {
+      type: String,
+      required: false,
+    },
+    watchHistory: [
       {
         type: Schema.Types.ObjectId,
         ref: "Video",
