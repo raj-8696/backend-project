@@ -102,9 +102,9 @@ const loginUser = asyncHandler(async (req, res, _) => {
     throw new ApiError(404, "User is not registered");
   }
 
-  const isValidPassword = await user.matchPasswords(password);
+  const isPasswordCorrect = await user.isPasswordCorrect(password);
 
-  if (!isValidPassword) {
+  if (!isPasswordCorrect) {
     throw new ApiError(401, "Invalid user credentials");
   }
 
