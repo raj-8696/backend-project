@@ -23,12 +23,11 @@ const generateAccessAndRefreshToken = async (userId) => {
   }
 };
 
-const registerUser = asyncHandler(async (req, res, _) => {
+const registerUser = asyncHandler(async (req, res) => {
   const { username, fullName, email, password } = req.body;
 
   if (
-    [username, fullName, email, password].some((field) => field?.trim() === "")
-  ) {
+    [username, fullName, email, password].some((field) => field?.trim() === "")) {
     throw new ApiError(400, "All fields are required");
   }
 
@@ -87,7 +86,7 @@ const registerUser = asyncHandler(async (req, res, _) => {
     );
 });
 
-const loginUser = asyncHandler(async (req, res, _) => {
+const loginUser = asyncHandler(async (req, res) => {
   const { email, username, password } = req.body;
 
   if (!email || !username) {
@@ -140,7 +139,7 @@ const loginUser = asyncHandler(async (req, res, _) => {
     );
 });
 
-const logoutUser = asyncHandler(async (req, res, _) => {
+const logoutUser = asyncHandler(async (req, res) => {
   await User.findByIdAndUpdate(
     req.user._id,
     {
@@ -163,7 +162,7 @@ const logoutUser = asyncHandler(async (req, res, _) => {
     .json(new ApiResponse(200, {}, "User logged out"));
 });
 
-const refreshToken = asyncHandler(async (req, res, _) => {
+const refreshToken = asyncHandler(async (req, res) => {
   const incomingRefreshToken =
     req.cookies?.refreshToken || req.body.refreshToken;
 
@@ -202,7 +201,7 @@ const refreshToken = asyncHandler(async (req, res, _) => {
     .json(new ApiResponse(200, { accessToken, refreshToken }));
 });
 
-const changeCurrentPassword = asyncHandler(async (req, res, _) => {
+const changeCurrentPassword = asyncHandler(async (req, res) => {
   const { password, newPassword } = req.body;
 
   const user = await User.findById(req.user?._id);
